@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const Users = require("./plantModel.js/index.js.js");
+const Users = require("./userModel");
 // for user: return shape of data during login
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
@@ -39,15 +39,15 @@ router.get("/:id/plants", (req, res) => {
 router.post("/:id/plants", (req, res) => {});
 router.put("/:id/plants/:plantid", (req, res) => {});
 router.delete("/:id/plants/:plantid", (req, res) => {
-  const { id, plantId } = req.params;
+  const { id, plantid } = req.params;
   Users.getUserId(id)
     .then(user => {
       if (user) {
-        Users.getPlantId(plantId)
+        Users.getPlantId(plantid)
           .then(plant => {
             if (plant) {
-              Users.removePlant(plantId)
-                .then(res => res.status(200).json(plant))
+              Users.removePlant(plantid)
+                .then(log => res.status(200).json(plant))
                 .catch(err =>
                   res.status(500).json({ error: "Try again later" })
                 );

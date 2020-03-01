@@ -14,12 +14,12 @@ function getUserId(id) {
     .first();
 }
 function getPlantId(plantId) {
-  return db("plant")
+  return db("plants")
     .where({ id: plantId })
     .first();
 }
 function removePlant(plantId) {
-  return db("plant")
+  return db("plants")
     .where({ id: plantId })
     .del();
 }
