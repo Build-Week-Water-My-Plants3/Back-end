@@ -16,7 +16,7 @@ server.use("/api/auth", authRouter);
 server.use("/api/user", restricted, userRouter);
 
 server.get("/", (req, res) => {
-  return res.send("Start watering your plants on time");
+  return res.send({ message: "Start watering your plants on time" });
 });
 
 module.exports = server;
