@@ -37,18 +37,34 @@ module.exports = {
   },
 
   production: {
-    client: "postgresql",
+    client: "sqlite3",
     connection: {
-      database: "my_db",
-      user: "username",
-      password: "password"
+      filename: "./data/users.db3"
+    },
+    useNullAsDefault: true,
+    migrations: {
+      directory: "./data/migrations"
+    },
+    seeds: {
+      directory: "./data/seeds"
     },
     pool: {
-      min: 2,
-      max: 10
-    },
-    migrations: {
-      tableName: "knex_migrations"
+      afterCreate: (conn, done) => {
+        conn.run("PRAGMA foreign_keys = ON", done);
+      }
     }
+    // client: "postgresql",
+    // connection: {
+    //   database: "my_db",
+    //   user: "username",
+    //   password: "password"
+    // },
+    // pool: {
+    //   min: 2,
+    //   max: 10
+    // },
+    // migrations: {
+    //   tableName: "knex_migrations"
+    // }
   }
 };
