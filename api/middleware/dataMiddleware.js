@@ -2,6 +2,8 @@ const users = require("../../routers/user/userModel");
 const { dataUri } = require("../middleware/images");
 const { uploader } = require("../config/cloudConfig");
 
+// MIDDLEWARE FOR IMAGE UPLOADING
+
 const vSpecies = async (req, res, next) => {
   const plantData = req.body;
 

@@ -2,6 +2,7 @@ const images = require("multer");
 const uri = require("datauri");
 const path = require("path");
 
+// MORE IMAGE UPLOAD FOR POST AND PUT
 const storage = images.memoryStorage();
 
 const filters = (req, file, cb) => {

@@ -1,4 +1,4 @@
-// plants
+// PLANTS
 exports.seed = function(knex) {
   return knex("plants").insert([
     // plant 1
