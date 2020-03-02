@@ -17,10 +17,12 @@
 | POST   | /register | registers a new user      | username,password, phonenumber |
 | POST   | /login    | signs in registered users | username,password              |
 
-- /api/plantRouter \*
-  | Method | Endpoints | Actions | Required |
-  | :----- | :-------- | :---------------------- | :------------------------------|
-  | POST | /:id/plants | post users plants | species id, nickname, frequency|
-  | GET | /:id/plants | gets users plants | |
-  | PUT | /:id/plants/plantid| updates users plants | species id, nickname, frequency|
-  | DELETE | /:id/plants/plantid| deletes users plants | |
+- /api/user \*
+
+| Method | Endpoints            | Actions              | Required                        |
+| :----- | :------------------- | :------------------- | :------------------------------ |
+| POST   | /:id/plants          | post users plants    | species id, nickname, frequency |
+| GET    | /:id/plants          | gets users plants    |                                 |
+| PUT    | /:id/plants/:plantid | updates users plants | species id, nickname, frequency |
+| DELETE | /:id/plants/plantid  | deletes users plants |                                 |
+| PUT    | /:id                 | updates users info   | phonenumber , password          |
