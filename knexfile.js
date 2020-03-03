@@ -35,7 +35,7 @@ module.exports = {
       }
     }
   },
-
+  // HEROKU LOOKS AT THIS FOR DEPLOYMENT
   production: {
     client: "sqlite3",
     connection: {

@@ -30,4 +30,3 @@ baseURL: https://water-my-plantss.herokuapp.com/
 | DELETE | /:id/plants/plantid  | deletes users plants |                                 |
 | PUT    | /:id                 | updates users info   | phonenumber , password          |
 
-

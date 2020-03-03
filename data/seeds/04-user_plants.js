@@ -1,4 +1,4 @@
-// user_plants
+// USER_PLANTS
 exports.seed = function(knex) {
   return knex("user_plants").insert([
     { userId: 1, plantId: 2 },

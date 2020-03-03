@@ -13,6 +13,7 @@ function getUserId(id) {
     .where({ id })
     .first();
 }
+
 function getPlantId(plantId) {
   // return db("plants")
   //   .where({ id: plantId })
@@ -33,12 +34,14 @@ function getPlant(id) {
     .first();
 }
 
+// REMOVE PLANT
 function removePlant(plantId) {
   return db("plants")
     .where({ id: plantId })
     .del();
 }
 
+// ADD PLANTS
 function addPlant(plantData) {
   return db("plants")
     .insert(plantData)
@@ -52,6 +55,7 @@ function addToUser(plantId, userId) {
   return db("user_plants").insert({ userId, plantId });
 }
 
+// UPDATE PLANT INFO
 function updatePlant(plantId, plantData) {
   return db("plants")
     .where({ id: plantId })
@@ -63,6 +67,7 @@ function updatePlant(plantId, plantData) {
     });
 }
 
+// UPDATE USER INFO
 function updateUser(userId, data) {
   return db("user")
     .where({ id: userId })

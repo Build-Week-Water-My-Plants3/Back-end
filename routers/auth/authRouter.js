@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const auth = require("./authModel");
 const { jwtSecret } = require("../../api/config/secrets");
 
+// ADD NEW USER
 router.post("/register", (req, res) => {
   const userData = req.body;
   if (userData.username && userData.password && userData.phonenumber) {
@@ -22,6 +23,8 @@ router.post("/register", (req, res) => {
   }
 });
 
+// LOGIN EXISTING USER
+// Fixing some things like add ID Monday after passing assesment
 router.post("/login", (req, res) => {
   const userData = req.body;
 
@@ -31,7 +34,7 @@ router.post("/login", (req, res) => {
       .then(user => {
         if (user && crypt.compareSync(userData.password, user.password)) {
           const token = signToken(user);
-          res.status(200).json({ token });
+          res.status(200).json({ id: user.id, token });
         }
       })
       .catch(error => {

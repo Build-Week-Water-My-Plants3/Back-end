@@ -1,4 +1,4 @@
-//users
+//USERS
 const crypt = require("bcryptjs");
 exports.seed = function(knex) {
   return knex("user").insert([
