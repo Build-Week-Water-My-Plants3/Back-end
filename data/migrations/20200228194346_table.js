@@ -46,6 +46,7 @@ exports.up = function(knex) {
       })
 
       // USERS PLANTS: userId, plantId
+      // MANAY TO MANY RELATIONSHIP FOR PLANTID AND USERID
       .createTable("user_plants", up => {
         up.primary(["userId", "plantId"]);
         up.integer("userId")

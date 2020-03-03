@@ -2,7 +2,7 @@ const images = require("multer");
 const uri = require("datauri");
 const path = require("path");
 
-// MORE IMAGE UPLOAD FOR POST AND PUT
+// GIVES YOU REQ.BODY AND REQ.FILE FROM FRONT END FORM DATA
 const storage = images.memoryStorage();
 
 const filters = (req, file, cb) => {
