@@ -11,24 +11,44 @@ const vSpecies = async (req, res, next) => {
     let species = plantData.species_name.toLowerCase();
 
     try {
-      const exist = await users.getSpecies({ name: species });
+      const exist = await users.getSpecies({ species_name: species });
       if (exist) {
-        plantData.species_name = exist.name;
+        // req.plant.species_id = exist.id;
+        req.plant = {
+          nickname: plantData.nickname,
+          species_id: exist.id,
+          frequency: plantData.frequency,
+          photo: plantData.photo
+        };
         next();
       } else {
         try {
-          const speciesAdded = await users.addSpecies(exist);
-          plantData.species_name = speciesAdded.name;
+          const speciesAdded = await users.addSpecies({
+            species_name: plantData.species_name
+          });
+          req.plant.species_id = speciesAdded.id;
+          req.plant = {
+            nickname: plantData.nickname,
+            species_id: speciesAdded.id,
+            frequency: plantData.frequency,
+            photo: plantData.photo
+          };
           next();
-        } catch (error) {
-          res.status(500).json({ error: "issue" });
+        } catch ({ error, name, message }) {
+          res.status(500).json({ error, name, message });
         }
       }
     } catch (error) {
       res.status(500).json({ error: "no species" });
     }
   } else {
-    plantData.species_name = "default";
+    // plantData.species_id = 1;
+    req.plant = {
+      nickname: plantData.nickname,
+      species_id: 1,
+      frequency: plantData.frequency,
+      photo: plantData.photo
+    };
     next();
   }
 };
