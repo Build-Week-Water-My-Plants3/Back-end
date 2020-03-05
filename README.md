@@ -1,3 +1,6 @@
+
+baseURL: https://water-my-plantss.herokuapp.com/
+
 ## Frameworks
 
 - bcryptjs
