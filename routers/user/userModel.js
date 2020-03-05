@@ -4,7 +4,8 @@ function getPlants(id) {
   return db("user_plants as up")
     .join("plants as p", "up.plantId", "p.id")
     .join("user as u", "up.userId", "u.id")
-    .select("p.nickname", "p.frequency", "p.photo", "up.*")
+    .join("species as s", "s.id", "p.species_id")
+    .select("p.nickname", "p.frequency", "p.photo", "s.species_name", "up.*")
     .where({ "up.userId": id });
 }
 function getUserId(id) {
