@@ -27,7 +27,7 @@ router.get("/:id", async (req, res) => {
 // EDIT USER
 router.put("/:id", (req, res) => {
   const { id } = req.params;
-  let data = req.body;
+  let data = req.plant;
 
   users.getUserId(id).then(user => {
     if (user) {
