@@ -72,41 +72,49 @@ router.get("/:id/plants", (req, res) => {
 });
 
 // ADD PLANTS
-router.post("/:id/plants", imageUpload, imageValidation, (req, res) => {
-  const { id } = req.params;
-  const data = req.body;
+router.post(
+  "/:id/plants",
+  imageUpload,
+  imageValidation,
+  vSpecies,
+  (req, res) => {
+    const { id } = req.params;
+    const data = req.plant;
+    // console.log(id);
+    console.log(data);
+    users
+      .getUserId(id)
 
-  users
-    .getUserId(id)
-    .then(user => {
-      if (user) {
-        if (data.nickname && data.frequency) {
-          users
-            .addPlant(data)
-            .then(plant => {
-              users
-                .addToUser(plant.id, id)
-                .then(userP => {
-                  res.status(200).json(plant);
-                })
-                .catch(error => {
-                  res.status(500).json({ error: "nada" });
-                });
-            })
-            .catch(error => {
-              res.status(500).json({ error: "cannot get user plant" });
-            });
+      .then(user => {
+        if (user) {
+          if (data.nickname && data.frequency) {
+            users
+              .addPlant(data)
+              .then(plant => {
+                users
+                  .addToUser(plant.id, id)
+                  .then(userP => {
+                    res.status(200).json(plant);
+                  })
+                  .catch(error => {
+                    res.status(500).json({ error: "nada" });
+                  });
+              })
+              .catch(({ name, message, error }) => {
+                res.status(500).json({ name, message, error });
+              });
+          } else {
+            res.status(400).json({ error: "might need a fix" });
+          }
         } else {
-          res.status(400).json({ error: "might need a fix" });
+          res.status(500).json({ error: "user not found" });
         }
-      } else {
-        res.status(500).json({ error: "user not found" });
-      }
-    })
-    .catch(error => {
-      res.status(500).json({ error: "no good" });
-    });
-});
+      })
+      .catch(error => {
+        res.status(500).json({ error: "no good" });
+      });
+  }
+);
 
 // EDIT PLANTS
 router.put("/:id/plants/:plantid", imageUpload, imageValidation, (req, res) => {

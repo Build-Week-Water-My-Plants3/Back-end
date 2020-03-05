@@ -79,6 +79,22 @@ function updateUser(userId, data) {
     });
 }
 
+function getSpecies(filter) {
+  return db("species")
+    .where(filter)
+    .first();
+}
+function addSpecies(species) {
+  return db("species")
+    .insert(species, "id")
+    .then(ids => {
+      const [id] = ids;
+      return db("species")
+        .where({ species_id: id })
+        .first();
+    });
+}
+
 module.exports = {
   getPlants,
   getPlant,
@@ -88,5 +104,7 @@ module.exports = {
   addPlant,
   addToUser,
   updatePlant,
-  updateUser
+  updateUser,
+  getSpecies,
+  addSpecies
 };
