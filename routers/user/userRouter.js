@@ -117,31 +117,37 @@ router.post(
 );
 
 // EDIT PLANTS
-router.put("/:id/plants/:plantid", imageUpload, imageValidation, (req, res) => {
-  const { id, plantid } = req.params;
-  const plantData = req.body;
+router.put(
+  "/:id/plants/:plantid",
+  imageUpload,
+  imageValidation,
+  vSpecies,
+  (req, res) => {
+    const { id, plantid } = req.params;
+    const plantData = req.plant;
 
-  users
-    .getUserId(id)
-    .then(user => {
-      users
-        .getPlant(plantid)
-        .then(plant => {
-          users
-            .updatePlant(plantid, plantData)
-            .then(update => {
-              res.status(200).json(update);
-            })
-            .catch(error => {
-              res.status(400).json({ error: "noooooo" });
-            });
-        })
-        .catch(error => {
-          res.status(500).json({ error: "plant not found" });
-        });
-    })
-    .catch(error => res.status(500).json({ error: "user not found" }));
-});
+    users
+      .getUserId(id)
+      .then(user => {
+        users
+          .getPlant(plantid)
+          .then(plant => {
+            users
+              .updatePlant(plantid, plantData)
+              .then(update => {
+                res.status(200).json(update);
+              })
+              .catch(error => {
+                res.status(400).json({ error: "noooooo" });
+              });
+          })
+          .catch(error => {
+            res.status(500).json({ error: "plant not found" });
+          });
+      })
+      .catch(error => res.status(500).json({ error: "user not found" }));
+  }
+);
 // DELETE PLANTS
 router.delete("/:id/plants/:plantid", (req, res) => {
   const { id, plantid } = req.params;
